@@ -37,6 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Custom Applications
+    'jobs.apps.JobsConfig',
+
+    # External Apps
+    ## Taggit(For tags management)
+    'taggit',
+
+    ## Ckeditor(For wysiwyg editor)
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -76,7 +87,7 @@ WSGI_APPLICATION = 'koolkidsexun.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'konfluence_library',
+        'NAME': 'elite',
         'USER':'postgres',
         'PASSWORD':'k@v1n@d351v@ll1psql',
         'HOST':'192.168.0.160',
@@ -122,3 +133,29 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+ os.path.join(BASE_DIR, 'static'),
+]
+
+#STATIC_ROOT = "/static/"
+
+# Media files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+SITE_ID = 1
+
+# CK_EDITOR CONFIGURATION
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+ 
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
+ 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+    },
+}
+
+TAGGIT_CASE_INSENSITIVE = True
