@@ -1,0 +1,23 @@
+{% load static %}
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-color">
+  <a class="navbar-brand" href="/master/loggedin">
+    <img src="{% static 'jobs/img/logo.jpg' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+    koolkidsklub.com
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <!-- <li class="nav-item {{home}}">
+        <a class="nav-link" href="{% url 'loggedin' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item {{home}}">
+        <a class="nav-link" href="{% url 'jobs' %}">Jobs</a>
+      </li>
+      </li> -->
+    </ul>
+    <a type="button" class="btn btn-outline-light custom-btn" href="{% url 'logout' %}">Logout</a>
+  </div>
+</nav>

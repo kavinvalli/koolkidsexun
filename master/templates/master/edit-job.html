@@ -1,0 +1,118 @@
+{% extends 'master/base.html' %}
+{% block content %}
+<form action="{% url 'edit-job' job.id %}" method="POST">
+    {% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input class="form-control" type="text" placeholder="Eg. Digital Marketing" value="{{job.title}}" name="title">
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <select class="selectpicker form-control" data-show-subtext="true" data-live-search="true"
+                        name="location">
+                        <option value="None">Select a location</option>
+                        {% for location in locations %}
+                        {% ifequal location.id job.location.id %}
+                        <option value="{{location.id}}" selected>{{location.name}}</option>
+                        {% else %}
+                        <option value="{{location.id}}">{{location.name}}</option>
+                        {% endifequal %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="employment_type">Employment Type</label>
+                    <select name="employment_type" id="employment_type" class="form-control">
+                        {% if job.employment_type == 1 %}
+                        <option value="1" selected>Full-time</option>
+                        <option value="2">Part-time</option>
+                        {% else %}
+                        <option value="1">Full-time</option>
+                        <option value="2" selected>Part-time</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="form-group">
+                    <label for="seniority_level">Seniority Level</label>
+                    <select name="seniority_level" id="seniority_level" class="form-control">
+                        {% if job.seniority_level == 1 %}
+                        <option selected value="1">General</option>
+                        <option value="2">Lt. General</option>
+                        <option value="3">Major</option>
+                        <option value="4">Colonel</option>
+                        <option value="5">Cadet</option>
+                        {% elif job.seniority_level == 2 %}
+                        <option value="1">General</option>
+                        <option selected value="2">Lt. General</option>
+                        <option value="3">Major</option>
+                        <option value="4">Colonel</option>
+                        <option value="5">Cadet</option>
+                        {% elif job.seniority_level == 3 %}
+                        <option value="1">General</option>
+                        <option value="2">Lt. General</option>
+                        <option selected value="3">Major</option>
+                        <option value="4">Colonel</option>
+                        <option value="5">Cadet</option>
+                        {% elif job.seniority_level == 4 %}
+                        <option value="1">General</option>
+                        <option value="2">Lt. General</option>
+                        <option value="3">Major</option>
+                        <option selected value="4">Colonel</option>
+                        <option value="5">Cadet</option>
+                        {% else %}
+                        <option value="1">General</option>
+                        <option value="2">Lt. General</option>
+                        <option value="3">Major</option>
+                        <option value="4">Colonel</option>
+                        <option selected value="5">Cadet</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <select name="department" id="department" class="form-control">
+                        <option value="None">Choose a department</option>
+                        {% for department in departments %}
+                        {% ifequal department.id job.department.id %}
+                        <option value="{{department.id}}" selected>{{department.name}}</option>
+                        {% else %}
+                        <option value="{{department.id}}">{{department.name}}</option>
+                        {% endifequal %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{job.description}}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-outline-primary">Edit!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

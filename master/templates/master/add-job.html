@@ -1,0 +1,81 @@
+{% extends 'master/base.html' %}
+{% block content %}
+<form action="{% url 'add-job' %}" method="POST">
+    {% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input class="form-control" type="text" placeholder="Eg. Digital Marketing" name="title">
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <select class="selectpicker form-control" data-show-subtext="true" data-live-search="true"
+                        name="location">
+                        <option value="None">Select a location</option>
+                        {% for location in locations %}
+                        <option value="{{location.id}}">{{location.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="employment_type">Employment Type</label>
+                    <select name="employment_type" id="employment_type" class="form-control">
+                        <option value="None">Select a type</option>
+                        <option value="1">Full-time</option>
+                        <option value="2">Part-time</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="form-group">
+                    <label for="seniority_level">Seniority Level</label>
+                    <select name="seniority_level" id="seniority_level" class="form-control">
+                        <option value="None">Select a level</option>
+                        <option value="1">General</option>
+                        <option value="2">Lt. General</option>
+                        <option value="3">Major</option>
+                        <option value="4">Colonel</option>
+                        <option value="5">Cadet</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <select name="department" id="department" class="form-control">
+                        <option value="None">Choose a department</option>
+                        {% for department in departments %}
+                        <option value="{{department.id}}">{{department.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-outline-primary">Add!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'master/base.html' %}
+{% block content %}
+<!-- {% for job in jobs_applied %}
+{{job.title}}
+{% for person in job.applied_by.all %}
+{{person.user.first_name}}
+{{person.education}}
+{% endfor %}
+{% endfor %} -->
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name of person</th>
+            <th scope="col">Job</th>
+            <th scope="col">Education</th>
+            <th scope="col">Gender</th>            
+            <th scope="col">Have a look!</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for person in job_applied.applied_by.all %}
+        <tr>
+            <td>{{person.user.first_name}} {{person.user.last_name}}</td>
+            <td>{{job_applied.title}} for {{job_applied.get_seniority_level_display}}</td>
+            <td>{{person.education}}</td>
+            <td>{{person.get_gender_display}}</td>
+            <td><a href="{% url 'applicant' person.id %}" type="button" class="btn btn-success">Have a look at this Person!</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

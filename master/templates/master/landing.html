@@ -1,0 +1,65 @@
+{% extends 'master/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <a href="/master/loggedin/jobs">
+                <div class="statistics text-center blue">
+                    <b>Total no. of jobs</b>
+                    <br>
+                    <h3 style="margin-top:25px;">{{total_jobs.count}}</h3>
+                </div>
+            </a>
+        </div>
+        <div class="col-3">
+            <a href="/master/loggedin/recruited-jobs">
+                <div class="statistics text-center green">
+                    <b>No. of taken jobs</b>
+                    <h3 style="margin-top:25px;">{{taken_jobs.count}}</h3>
+                </div>
+            </a>
+        </div>
+        <div class="col-3">
+            <a href="/master/loggedin/applied-jobs">
+                <div class="statistics text-center brown">
+                    <b>No. of open jobs</b>
+                    <h3 style="margin-top:25px;">{{open_jobs.count}}</h3>
+                </div>
+            </a>
+        </div>
+        <div class="col-3">
+            <div class="statistics text-center red">
+                <b>No. of users</b>
+                <h3 style="margin-top:25px;">{{users.count}}</h3>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <center><h2>Last 5 jobs and people who have applied</h2></center>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name of person</th>
+                <th scope="col">Job</th>
+                <th scope="col">Education</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Have a look!</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs_applied %}
+            {% for person in job.applied_by.all %}
+            <tr>
+                <td>{{person.user.first_name}} {{person.user.last_name}}</td>
+                <td>{{job.title}} for {{job.get_seniority_level_display}}</td>
+                <td>{{person.education}}</td>
+                <td>{{person.get_gender_display}}</td>
+                <td><a href="{% url 'applicant' person.id %}" type="button" class="btn btn-success">Have a look at this
+                        person!</a></td>
+            </tr>
+            {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

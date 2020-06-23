@@ -40,6 +40,9 @@ INSTALLED_APPS = [
 
     # Custom Applications
     'jobs.apps.JobsConfig',
+    'login.apps.LoginConfig',
+    'register.apps.RegisterConfig',
+    'master.apps.MasterConfig',
 
     # External Apps
     ## Taggit(For tags management)
@@ -159,3 +162,10 @@ CKEDITOR_CONFIGS = {
 }
 
 TAGGIT_CASE_INSENSITIVE = True
+
+# Email SMTP Server
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.foop.com'
+EMAIL_HOST_USER = 'info@foop.com'
+EMAIL_HOST_PASSWORD = 'rvue!Jr7'
+EMAIL_PORT = 587

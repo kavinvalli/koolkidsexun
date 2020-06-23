@@ -1,0 +1,94 @@
+{% extends 'jobs/base.html' %}
+{% block customcss %}
+<style>
+    .banner {
+        background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url("https://cdn.searchenginejournal.com/wp-content/uploads/2017/06/shutterstock_268688447.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        color: #fff;
+        padding-top: 110px;
+        padding-bottom: 110px;
+    }
+
+    .text {
+        font-size: 52px;
+        font-weight: 600;
+        text-transform: none;
+        color: #fff;
+    }
+
+    .small-text {
+        color: #fff;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text">Kool Kids Klub</h1>
+                <p class="small-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <center>
+        <h1>What all jobs are available with us?</h1>
+    </center>
+    <center>
+        <div class="row">
+            {% for job in jobs %}
+            <div class="card" style="width: 18rem; margin:20px;">
+                <div class="card-body">
+                    <h5 class="card-title">{{job.title}}</h5>
+                    <p class="card-text">
+                    <table>
+                        <tr>
+                            <th class="customtd">Location</td>
+                            <td class="customtd">{{job.location.name}}</td>
+                        </tr>
+                        <tr>
+                            <th class="customtd">Post</td>
+                            <td class="customtd">{{job.get_seniority_level_display}}</td>
+                        </tr>
+                        <tr>
+                            <th class="customtd">Department</th>
+                            <td class="customtd">{{job.department.name}}</td>
+                        </tr>
+                    </table>
+                    </p>
+                    <a href="{% url 'user_specific_job_details' user.id job.id %}" class="btn btn-primary">Have a
+                        look!</a>
+                        {% if job in applied_jobs %}
+                        <br>
+                        Note: You've already applied for this Job
+                        {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if is_paginated %}
+        <div class="pagination">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="/jobs/{{user.id}}/jobs/?page={{page_obj.previous_page_number}}">Previous</a></li>
+                    {% endif %}
+                    <center>
+                        <li class="page-item active"><a class="page-link" href="#">{{page_obj.number}}</a></li>
+                    </center>
+                    {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="/jobs/{{user.id}}/jobs/?page={{page_obj.next_page_number}}">Next</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+    </center>
+</div>
+{% endif %}
+
+
+{% endblock %}

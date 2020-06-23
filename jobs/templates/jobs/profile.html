@@ -1,0 +1,143 @@
+{% extends 'jobs/base.html' %}
+{% block customcss %}
+<style>
+    .custom-td {
+        padding: 10px;
+    }
+
+    .modal-body {
+        padding: 24px;
+    }
+</style>
+{% endblock %}
+{% block content %}
+
+<div class="row h-100">
+    <div class="col-12 my-auto text-center">
+        <div class="card" style="width: 18rem; margin-left:auto;margin-right:auto;">
+            <div class="card-body">
+                <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
+                <p class="card-text text-center">
+                    <center>
+                        <table>
+                            <tr>
+                                <th class="custom-td">Age</th>
+                                <td class="custom-td">{{applicant.age}}</td>
+                            </tr>
+                            <tr>
+                                <th class="custom-td">Gender</th>
+                                <td class="custom-td">{{applicant.get_gender_display}}</td>
+                            </tr>
+                            <tr>
+                                <th class="custom-td">Education</th>
+                                <td class="custom-td">{{applicant.education}}</td>
+                            </tr>
+                            <tr>
+                                <th class="custom-td">Email</th>
+                                <td class="custom-td">{{user.email}}</td>
+                            </tr>
+                            <tr>
+                                <th class="custom-td">Mobile</th>
+                                <td class="custom-td">{{applicant.mobile}}</td>
+                            </tr>
+                        </table>
+                    </center>
+                </p>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                    data-target="#profileModal">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal  -->
+<div class="modal" tabindex="-1" role="dialog" id="profileModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit your profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p></p>
+                <form action="{% url 'profile' user.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="applicant" id="applicant">
+                    <input type="hidden" name="user" id="user">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="name">First Name</label>
+                                <input type="text" class="form-control" name="first_name" id="first_name"
+                                    value="{{user.first_name}}">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="name">Last Name</label>
+                                <input type="text" class="form-control" name="last_name" id="last_name"
+                                    value="{{user.last_name}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="number" class="form-control" name="age" id="age" value="{{applicant.age}}">
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select class="form-control" name="gender" id="gender">
+                                    {% if applicant.gender == 1 %}
+                                    <option value="1" selected>Male</option>
+                                    <option value="2">Female</option>
+                                    <option value="3">Transgender</option>
+                                    <option value="4">Prefer Not to Say</option>
+                                    {% elif applicant.gender == 2 %}
+                                    <option value="1">Male</option>
+                                    <option value="2" selected>Female</option>
+                                    <option value="3">Transgender</option>
+                                    <option value="4">Prefer Not to Say</option>
+                                    {% elif applicant.gender == 3 %}
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                    <option value="3" selected>Transgender</option>
+                                    <option value="4">Prefer Not to Say</option>
+                                    {% elif applicant.gender == 4 %}
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                    <option value="3">Transgender</option>
+                                    <option value="4" selected>Prefer Not to Say</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Education</label>
+                        <input type="text" class="form-control" name="education" id="education"
+                            value="{{applicant.education}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" name="email" id="email" value="{{user.email}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">Mobile</label>
+                        <input type="mobile" class="form-control" name="mobile" id="mobile" value="{{applicant.mobile}}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Edit</button>
+                </form>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

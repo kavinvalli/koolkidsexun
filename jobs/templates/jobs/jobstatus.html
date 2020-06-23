@@ -1,0 +1,92 @@
+{% extends 'jobs/base.html' %}
+{% block content %}
+
+<div class="applied-open-jobs">
+    <h2>Applied Jobs(Still Open)</h2>
+    <table class="table">
+        <thead>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Department</th>
+            <th scope="col">Employment Type</th>
+            <th scope="col">Seniority Level</th>
+            <th scope="col">Department</th>
+            <th scope="col">Location</th>
+            <th scope="col">Status</th>
+        </thead>
+        <tbody>
+            {% for job in applied_open_jobs %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{job.title}}</td>
+                <td>{{job.department}}</td>
+                <td>{{job.get_employment_type_display}}</td>
+                <td>{{job.get_seniority_level_display}}</td>
+                <td>{{job.department}}</td>
+                <td>{{job.location.name}}</td>
+                <td>{{job.get_status_display}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="applied-closed-jobs">
+    <h2>Applied Jobs(Sorry, Someone else has been recruited)</h2>
+    <table class="table">
+        <thead>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Department</th>
+            <th scope="col">Employment Type</th>
+            <th scope="col">Seniority Level</th>
+            <th scope="col">Department</th>
+            <th scope="col">Location</th>
+            <th scope="col">Status</th>
+        </thead>
+        <tbody>
+            {% for job in applied_closed_jobs %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{job.title}}</td>
+                <td>{{job.department}}</td>
+                <td>{{job.get_employment_type_display}}</td>
+                <td>{{job.get_seniority_level_display}}</td>
+                <td>{{job.department}}</td>
+                <td>{{job.location.name}}</td>
+                <td>{{job.get_status_display}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="recruited-jobs">
+    <h2>Recruited Jobs</h2>
+    <table class="table">
+        <thead>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Department</th>
+            <th scope="col">Employment Type</th>
+            <th scope="col">Seniority Level</th>
+            <th scope="col">Department</th>
+            <th scope="col">Location</th>
+            <th scope="col">Status</th>
+        </thead>
+        <tbody>
+            {% for job in recruited_jobs %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{job.title}}</td>
+                <td>{{job.department}}</td>
+                <td>{{job.get_employment_type_display}}</td>
+                <td>{{job.get_seniority_level_display}}</td>
+                <td>{{job.department}}</td>
+                <td>{{job.location.name}}</td>
+                <td>{{job.get_status_display}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

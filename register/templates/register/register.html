@@ -1,0 +1,87 @@
+{% extends 'register/formbase.html' %}
+{% block form %}
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center" style="color:black;">Register</h5>
+            <p class="card-title text-center">
+              {% if message %}
+              <div class="message" style="color:red">
+                  {{message}}
+              </div>
+              {% endif %}
+            </p>
+            <form action="{% url 'register' %}" style="color:white;" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="username" style="color:black">First Name:</label>
+                            <input type="text" class="form-control" placeholder="John" name="first_name" required>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="username" style="color:black">Last Name:</label>
+                            <input type="text" class="form-control" placeholder="John" name="last_name" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="username" style="color:black">Username:</label>
+                    <input type="text" class="form-control" placeholder="text1234" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" style="color:black">Email Id:</label>
+                    <input type="email" class="form-control" placeholder="text123@something.com" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password" style="color:black">Password:</label>
+                    <input type="password" class="form-control" placeholder="password" name="password" required>
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <label for="mobile" style="color:black">Mobile:</label>
+                            <input type="number" class="form-control" placeholder="9999999999" name="mobile" required>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="gender" style="color:black">Gender:</label>
+                            <select name="gender" class="form-control">
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                                <option value="3">Transgender</option>
+                                <option value="4">Prefer Not to Say</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="age" style="color:black">Age</label>
+                            <input type="number" class="form-control" placeholder="20" name="age">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="education" style="color:black">Education</label>
+                            <input type="text" class="form-control" placeholder="B.A, MBA" name="education">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-outline-success">Register</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

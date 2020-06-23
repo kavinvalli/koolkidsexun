@@ -1,0 +1,45 @@
+{% extends 'master/base.html' %}
+{% block content %}
+<center>
+<a href="{% url 'add-job' %}" type="button" class="btn btn-outline-primary" style="margin:24px;">Add job</a>
+</center>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Department</th>
+        <th scope="col">Employment Type</th>
+        <th scope="col">Seniority Level</th>
+        <th scope="col">Location</th>
+        <th scope="col">Status</th>
+        <th scope="col">Applied By</th>
+        <th scope="col">Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for job in jobs %}
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{job.title}}</td>
+        <td>{{job.department}}</td>
+        <td>{{job.get_employment_type_display}}</td>
+        <td>{{job.get_seniority_level_display}}</td>
+        <td>{{job.location.name}}</td>
+        <td>{{job.get_status_display}}</td>
+        <td>
+          {% ifequal job.status 1 %}
+            <a href="{% url 'specific-applied' job.id %}" type="button" class="btn btn-primary">Who's Applied?</a>
+          {% else %}
+            Recruited
+            {% endifequal %}
+        </td>
+        <td><a href="{% url 'edit-job' job.id %}" type="button" class="btn btn-primary">Edit</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+{% endblock %}

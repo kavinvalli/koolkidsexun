@@ -1,0 +1,49 @@
+{% load static %}
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-color">
+  <a class="navbar-brand" href="/">
+    <img src="{% static 'jobs/img/logo.jpg' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+    koolkidsklub.com
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item {{home}}">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item {{about}}">
+        <a class="nav-link" href="/about/">About Us</a>
+      </li>
+      <li class="nav-item {{perks}}">
+        <a class="nav-link" href="/perks/">Perks</a>
+      </li>
+      <li class="nav-item {{userjob}}">
+        {% if user.is_authenticated %}
+        <a class="nav-link" href="{% url 'user_all_jobs' user.id %}">Jobs</a>
+        {% else %}
+        <a class="nav-link" href="{% url 'login' %}">Jobs</a>
+        {% endif %}
+      </li>
+      </li>
+    </ul>
+    {% if user.is_authenticated %}
+    <li class="nav-item dropdown">
+      <a class="dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding:10px;">
+      <img src="https://media.istockphoto.com/photos/businessman-silhouette-as-avatar-or-default-profile-picture-picture-id476085198?k=6&m=476085198&s=612x612&w=0&h=5cDQxXHFzgyz8qYeBQu2gCZq1_TN0z40e_8ayzne0X0=" width="40" height="40" class="rounded-circle">
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="
+          right: 0;
+      ">
+      <a class="dropdown-item" href="{% url 'profile' user.id %}">Edit Profile</a>
+      <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+      </div>
+      </li>
+    {% else %}
+    <a type="button" class="btn btn-outline-light custom-btn" href="{% url 'login' %}">Log In</a>
+    <a type="button" class="btn btn-outline-light custom-btn" href="{% url 'register' %}">Register</a>
+
+    {% endif %}
+  </div>
+</nav>

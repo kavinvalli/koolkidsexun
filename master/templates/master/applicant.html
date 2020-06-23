@@ -1,0 +1,104 @@
+{% extends 'master/base.html' %}
+{% block content %}
+<div class="container">
+    <center>
+        <div>
+            <h2>Who're we looking at?</h2>
+        </div>
+        <div>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{applicant.user.first_name}} {{applicant.user.last_name}}</h5>
+                    <p class="card-text">
+                    <table>
+                        <tr>
+                            <th>Age</th>
+                            <td>{{applicant.age}}</td>
+                        </tr>
+                        <tr>
+                            <th>Gender</th>
+                            <td>{{applicant.get_gender_display}}</td>
+                        </tr>
+                        <tr>
+                            <th>Education</th>
+                            <td>{{applicant.education}}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{applicant.user.email}}</td>
+                        </tr>
+                        <tr>
+                            <th>Mobile</th>
+                            <td>{{applicant.mobile}}</td>
+                        </tr>
+                    </table>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div>
+            <h3>What have they applied for?</h3>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Employment Type</th>
+                    <th scope="col">Seniority Level</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Recruit them</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in jobs %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{job.title}}</td>
+                    <td>{{job.department}}</td>
+                    <td>{{job.get_employment_type_display}}</td>
+                    <td>{{job.get_seniority_level_display}}</td>
+                    <td>{{job.department}}</td>
+                    <td>{{job.location.name}}</td>
+                    <td>{{job.get_status_display}}</td>
+                    <td><button type="button" data-toggle="modal" data-target="#recruitModal" class="btn btn-outline-warning" data-job="{{job.id}}" data-applicant="{{applicant.id}}" data-applicantname="{{applicant.user.first_name}}" data-jobtitle="{{job.title}}">Recruit them</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+</div>
+</center>
+<!-- Modal  -->
+
+<div class="modal" tabindex="-1" role="dialog" id="recruitModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Recruit them</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Sure you wanna recuit them?</p>
+          <p>They will be sent an email once you click on recruit!</p>
+          <form action="{% url 'recruit' %}" method="POST">
+              {% csrf_token %}
+          <input type="hidden" name="applicant" id="applicant">
+          <input type="hidden" name="job" id="job">
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Sure</button>
+        </form>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
