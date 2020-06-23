@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'b)t_pa62qhptn)^v9_7wxq*_jfg4+_bpmkjshl#k80k#po8g3q'
+SECRET_KEY = '' # Filled in Deployment server
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -90,11 +90,11 @@ WSGI_APPLICATION = 'koolkidsexun.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'koolkidsklub',
-        'USER':'koolkid',
-       'PASSWORD':'k00lk1d',
-        'HOST':'127.0.0.1',
-        'PORT':5432,
+        'NAME': '', # Filled in Deployment server
+        'USER':'', # Filled in Deployment server
+       'PASSWORD':'', # Filled in Deployment server
+        'HOST':'', # Filled in Deployment server
+        'PORT':, # Filled in Deployment server
     }
 }
 
@@ -165,7 +165,7 @@ TAGGIT_CASE_INSENSITIVE = True
 
 # Email SMTP Server
 # EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.foop.com'
-EMAIL_HOST_USER = 'info@foop.com'
-EMAIL_HOST_PASSWORD = 'rvue!Jr7'
-EMAIL_PORT = 587
+EMAIL_HOST = '' # Filled in Deployment server
+EMAIL_HOST_USER = '' # Filled in Deployment server
+EMAIL_HOST_PASSWORD = '' # Filled in Deployment server
+EMAIL_PORT = # Filled in Deployment server
