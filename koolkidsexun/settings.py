@@ -25,7 +25,7 @@ SECRET_KEY = 'b)t_pa62qhptn)^v9_7wxq*_jfg4+_bpmkjshl#k80k#po8g3q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['dps.kavin.me']
 
 
 # Application definition
@@ -90,10 +90,10 @@ WSGI_APPLICATION = 'koolkidsexun.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'elite',
-        'USER':'postgres',
-        'PASSWORD':'k@v1n@d351v@ll1psql',
-        'HOST':'192.168.0.160',
+        'NAME': 'koolkidsklub',
+        'USER':'koolkid',
+       'PASSWORD':'k00lk1d',
+        'HOST':'127.0.0.1',
         'PORT':5432,
     }
 }
@@ -137,11 +137,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
- os.path.join(BASE_DIR, 'static'),
-]
+#STATICFILES_DIRS = [
+# os.path.join(BASE_DIR, 'static'),
+#]
 
-#STATIC_ROOT = "/static/"
+STATIC_ROOT = "/var/www/koolkidsexun/static/"
 
 # Media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -164,7 +164,7 @@ CKEDITOR_CONFIGS = {
 TAGGIT_CASE_INSENSITIVE = True
 
 # Email SMTP Server
-EMAIL_USE_TLS = True
+# EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.foop.com'
 EMAIL_HOST_USER = 'info@foop.com'
 EMAIL_HOST_PASSWORD = 'rvue!Jr7'
